@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#8B5CF6">
+    <title>Stella - Demo Preview</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/globals.css">
+    <link rel="stylesheet" href="css/glassmorphism.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/screens/splash.css">
+    <link rel="stylesheet" href="css/screens/auth.css">
+    <link rel="stylesheet" href="css/screens/customer.css">
+    <link rel="stylesheet" href="css/screens/shopkeeper.css">
+    <link rel="stylesheet" href="css/screens/delivery.css">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <style>
+        /* Demo-specific styles */
+        .demo-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .demo-title {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .demo-nav {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .demo-btn {
+            padding: 0.5rem 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .demo-btn:hover {
+            background: var(--glass-bg-light);
+            color: var(--text-primary);
+        }
+        
+        .demo-btn.active {
+            background: var(--primary-purple);
+            color: var(--text-primary);
+            border-color: var(--primary-purple);
+        }
+        
+        .demo-content {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+        
+        .demo-info {
+            position: fixed;
+            bottom: 1rem;
+            left: 1rem;
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            max-width: 300px;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            z-index: 999;
+        }
+        
+        .demo-info h4 {
+            color: var(--text-primary);
+            margin: 0 0 0.5rem 0;
+            font-size: 1rem;
+        }
+        
+        .demo-info p {
+            margin: 0 0 0.5rem 0;
+            line-height: 1.4;
+        }
+        
+        .demo-info p:last-child {
+            margin-bottom: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .demo-header {
+                padding: 0.75rem;
+            }
+            
+            .demo-title {
+                font-size: 1rem;
+            }
+            
+            .demo-nav {
+                gap: 0.25rem;
+            }
+            
+            .demo-btn {
+                padding: 0.375rem 0.75rem;
+                font-size: 0.75rem;
+            }
+            
+            .demo-info {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Demo Header -->
+    <div class="demo-header">
+        <h1 class="demo-title">Stella App - Demo Preview</h1>
+        <div class="demo-nav">
+            <button class="demo-btn active" onclick="showDemo('splash')">Splash</button>
+            <button class="demo-btn" onclick="showDemo('auth')">Auth</button>
+            <button class="demo-btn" onclick="showDemo('customer')">Customer</button>
+            <button class="demo-btn" onclick="showDemo('shopkeeper')">Shopkeeper</button>
+            <button class="demo-btn" onclick="showDemo('delivery')">Delivery</button>
+        </div>
+    </div>
+    
+    <!-- Demo Content -->
+    <div class="demo-content" id="demo-content">
+        <!-- Splash Screen Demo -->
+        <div class="splash-screen">
+            <!-- Floating Particles -->
+            <div class="splash-particles">
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+                <div class="particle"></div>
+            </div>
+
+            <!-- Logo Container -->
+            <div class="splash-logo-container">
+                <div class="splash-logo-glow"></div>
+                <div class="splash-logo">S</div>
+            </div>
+
+            <!-- Brand Section -->
+            <div class="splash-brand">
+                <h1 class="splash-title">Stella</h1>
+                <p class="splash-tagline">Hyperlocal Clothing Delivery</p>
+            </div>
+
+            <!-- Features -->
+            <div class="splash-features">
+                <div class="splash-feature">
+                    <i data-lucide="zap" class="splash-feature-icon"></i>
+                    <p class="splash-feature-text">Lightning-fast delivery from local stores</p>
+                </div>
+                <div class="splash-feature">
+                    <i data-lucide="shield-check" class="splash-feature-icon"></i>
+                    <p class="splash-feature-text">Secure payments and quality guarantee</p>
+                </div>
+                <div class="splash-feature">
+                    <i data-lucide="heart" class="splash-feature-icon"></i>
+                    <p class="splash-feature-text">Support your local clothing businesses</p>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="splash-actions">
+                <button class="btn btn-primary splash-get-started">
+                    <i data-lucide="arrow-right"></i>
+                    Get Started
+                </button>
+                <button class="btn splash-login">
+                    <i data-lucide="log-in"></i>
+                    Sign In
+                </button>
+            </div>
+
+            <!-- Footer -->
+            <div class="splash-footer">
+                <p class="splash-version">Version 1.0.0</p>
+                <p class="splash-copyright">© 2024 Stella. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Demo Info Panel -->
+    <div class="demo-info">
+        <h4>🎨 Design Preview</h4>
+        <p>This is a static preview of the Stella app's design system and UI components.</p>
+        <p>Features glassmorphism effects, 3D buttons, and responsive dark theme.</p>
+        <p>Use the navigation above to explore different screens.</p>
+    </div>
+
+    <script>
+        // Demo functionality
+        function showDemo(screen) {
+            // Update active button
+            document.querySelectorAll('.demo-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            const content = document.getElementById('demo-content');
+            
+            switch(screen) {
+                case 'splash':
+                    content.innerHTML = getSplashDemo();
+                    break;
+                case 'auth':
+                    content.innerHTML = getAuthDemo();
+                    break;
+                case 'customer':
+                    content.innerHTML = getCustomerDemo();
+                    break;
+                case 'shopkeeper':
+                    content.innerHTML = getShopkeeperDemo();
+                    break;
+                case 'delivery':
+                    content.innerHTML = getDeliveryDemo();
+                    break;
+            }
+            
+            // Re-initialize Lucide icons
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        }
+        
+        function getSplashDemo() {
+            return `
+                <div class="splash-screen">
+                    <div class="splash-particles">
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                    </div>
+                    <div class="splash-logo-container">
+                        <div class="splash-logo-glow"></div>
+                        <div class="splash-logo">S</div>
+                    </div>
+                    <div class="splash-brand">
+                        <h1 class="splash-title">Stella</h1>
+                        <p class="splash-tagline">Hyperlocal Clothing Delivery</p>
+                    </div>
+                    <div class="splash-features">
+                        <div class="splash-feature">
+                            <i data-lucide="zap" class="splash-feature-icon"></i>
+                            <p class="splash-feature-text">Lightning-fast delivery from local stores</p>
+                        </div>
+                        <div class="splash-feature">
+                            <i data-lucide="shield-check" class="splash-feature-icon"></i>
+                            <p class="splash-feature-text">Secure payments and quality guarantee</p>
+                        </div>
+                        <div class="splash-feature">
+                            <i data-lucide="heart" class="splash-feature-icon"></i>
+                            <p class="splash-feature-text">Support your local clothing businesses</p>
+                        </div>
+                    </div>
+                    <div class="splash-actions">
+                        <button class="btn btn-primary splash-get-started">
+                            <i data-lucide="arrow-right"></i>
+                            Get Started
+                        </button>
+                        <button class="btn splash-login">
+                            <i data-lucide="log-in"></i>
+                            Sign In
+                        </button>
+                    </div>
+                    <div class="splash-footer">
+                        <p class="splash-version">Version 1.0.0</p>
+                        <p class="splash-copyright">© 2024 Stella. All rights reserved.</p>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function getAuthDemo() {
+            return `
+                <div class="auth-screen">
+                    <div class="auth-header">
+                        <div class="auth-logo">S</div>
+                        <h1 class="auth-title">Stella</h1>
+                        <p class="auth-subtitle">Hyperlocal Clothing Delivery</p>
+                    </div>
+                    <div class="auth-container">
+                        <form class="auth-form">
+                            <div class="auth-form-header">
+                                <h2 class="auth-form-title">Welcome Back</h2>
+                                <p class="auth-form-subtitle">Sign in to continue shopping</p>
+                            </div>
+                            <div class="auth-form-group">
+                                <label class="auth-label">Email Address</label>
+                                <div class="auth-input-icon">
+                                    <input type="email" class="auth-input" placeholder="Enter your email">
+                                    <i data-lucide="mail"></i>
+                                </div>
+                            </div>
+                            <div class="auth-form-group">
+                                <label class="auth-label">Password</label>
+                                <div class="auth-input-icon">
+                                    <input type="password" class="auth-input" placeholder="Enter your password">
+                                    <i data-lucide="lock"></i>
+                                </div>
+                            </div>
+                            <div class="auth-checkbox">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">Remember me</label>
+                            </div>
+                            <button type="button" class="btn btn-primary auth-submit">
+                                <i data-lucide="log-in"></i>
+                                Sign In
+                            </button>
+                            <div class="auth-forgot">
+                                <a href="#">Forgot your password?</a>
+                            </div>
+                        </form>
+                        <div class="auth-divider"><span>or continue with</span></div>
+                        <div class="auth-social">
+                            <button class="auth-social-btn auth-google">
+                                <span class="social-icon">G</span>
+                                Continue with Google
+                            </button>
+                            <button class="auth-social-btn auth-facebook">
+                                <span class="social-icon">f</span>
+                                Continue with Facebook
+                            </button>
+                        </div>
+                        <div class="auth-switch">
+                            Don't have an account? <a href="#">Sign Up</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function getCustomerDemo() {
+            return `
+                <div class="customer-home">
+                    <div class="home-hero">
+                        <div class="home-greeting">
+                            <h1>Good morning, Alex!</h1>
+                            <p>Discover amazing clothing from local stores</p>
+                        </div>
+                        <div class="home-location">
+                            <i data-lucide="map-pin"></i>
+                            <div class="home-location-text">
+                                <p class="home-location-label">Deliver to</p>
+                                <p class="home-location-address">123 Main St, Downtown</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="home-search">
+                        <div class="glass-search">
+                            <i data-lucide="search" class="search-icon"></i>
+                            <input type="text" class="glass-input" placeholder="Search for clothes, brands, stores...">
+                        </div>
+                        <div class="search-suggestions">
+                            <span class="search-suggestion">Dresses</span>
+                            <span class="search-suggestion">Casual Wear</span>
+                            <span class="search-suggestion">Accessories</span>
+                        </div>
+                    </div>
+                    <div class="home-categories">
+                        <div class="section-header">
+                            <h2 class="section-title">Categories</h2>
+                            <a href="#" class="section-action">View All</a>
+                        </div>
+                        <div class="categories-grid">
+                            <div class="category-item">
+                                <div class="category-icon"><i data-lucide="shirt"></i></div>
+                                <p class="category-name">Shirts</p>
+                            </div>
+                            <div class="category-item">
+                                <div class="category-icon"><i data-lucide="crown"></i></div>
+                                <p class="category-name">Dresses</p>
+                            </div>
+                            <div class="category-item">
+                                <div class="category-icon"><i data-lucide="glasses"></i></div>
+                                <p class="category-name">Accessories</p>
+                            </div>
+                            <div class="category-item">
+                                <div class="category-icon"><i data-lucide="footprints"></i></div>
+                                <p class="category-name">Shoes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <nav class="bottom-nav">
+                    <button class="nav-item active">
+                        <i data-lucide="home"></i>
+                        <span>Home</span>
+                    </button>
+                    <button class="nav-item">
+                        <i data-lucide="store"></i>
+                        <span>Stores</span>
+                    </button>
+                    <button class="nav-item">
+                        <i data-lucide="shopping-cart"></i>
+                        <span>Cart</span>
+                        <span class="cart-badge">2</span>
+                    </button>
+                    <button class="nav-item">
+                        <i data-lucide="truck"></i>
+                        <span>Orders</span>
+                    </button>
+                    <button class="nav-item">
+                        <i data-lucide="user"></i>
+                        <span>Profile</span>
+                    </button>
+                </nav>
+            `;
+        }
+        
+        function getShopkeeperDemo() {
+            return `
+                <div class="shopkeeper-dashboard">
+                    <div class="dashboard-header">
+                        <div class="dashboard-welcome">
+                            <h1>Welcome back, Sarah!</h1>
+                            <p>Here's what's happening with your store today</p>
+                        </div>
+                        <div class="dashboard-stats">
+                            <div class="stat-card">
+                                <div class="stat-icon"><i data-lucide="shopping-bag"></i></div>
+                                <div class="stat-value">24</div>
+                                <div class="stat-label">New Orders</div>
+                                <div class="stat-change positive">
+                                    <i data-lucide="trending-up"></i>
+                                    +12%
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon"><i data-lucide="dollar-sign"></i></div>
+                                <div class="stat-value">$1,240</div>
+                                <div class="stat-label">Today's Sales</div>
+                                <div class="stat-change positive">
+                                    <i data-lucide="trending-up"></i>
+                                    +8%
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon"><i data-lucide="package"></i></div>
+                                <div class="stat-value">156</div>
+                                <div class="stat-label">Products</div>
+                                <div class="stat-change">
+                                    <i data-lucide="minus"></i>
+                                    0%
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon"><i data-lucide="star"></i></div>
+                                <div class="stat-value">4.8</div>
+                                <div class="stat-label">Rating</div>
+                                <div class="stat-change positive">
+                                    <i data-lucide="trending-up"></i>
+                                    +0.2
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard-content">
+                        <div class="dashboard-section">
+                            <div class="section-header">
+                                <h2 class="section-title">Recent Orders</h2>
+                                <a href="#" class="section-action">View All</a>
+                            </div>
+                            <div class="recent-orders">
+                                <div class="order-item">
+                                    <div class="order-header">
+                                        <span class="order-id">#ORD-001</span>
+                                        <span class="order-status pending">Pending</span>
+                                    </div>
+                                    <div class="order-customer">
+                                        <div class="customer-avatar">JD</div>
+                                        <div class="customer-info">
+                                            <h4>John Doe</h4>
+                                            <p>2 items • 5 min ago</p>
+                                        </div>
+                                    </div>
+                                    <div class="order-footer">
+                                        <span class="order-time">2:30 PM</span>
+                                        <span class="order-total">$89.99</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function getDeliveryDemo() {
+            return `
+                <div class="delivery-dashboard">
+                    <div class="delivery-header">
+                        <div class="delivery-welcome">
+                            <h1>Hello, Mike!</h1>
+                            <p>Ready to start delivering?</p>
+                        </div>
+                        <div class="delivery-status">
+                            <div class="status-indicator online"></div>
+                            <div class="status-text">
+                                <p class="status-label">Status</p>
+                                <p class="status-value">Online</p>
+                            </div>
+                            <button class="status-toggle active">Go Offline</button>
+                        </div>
+                        <div class="delivery-stats">
+                            <div class="delivery-stat">
+                                <div class="delivery-stat-icon"><i data-lucide="truck"></i></div>
+                                <div class="delivery-stat-value">12</div>
+                                <div class="delivery-stat-label">Deliveries</div>
+                            </div>
+                            <div class="delivery-stat">
+                                <div class="delivery-stat-icon"><i data-lucide="dollar-sign"></i></div>
+                                <div class="delivery-stat-value">$156</div>
+                                <div class="delivery-stat-label">Earned</div>
+                            </div>
+                            <div class="delivery-stat">
+                                <div class="delivery-stat-icon"><i data-lucide="clock"></i></div>
+                                <div class="delivery-stat-value">6.2h</div>
+                                <div class="delivery-stat-label">Online</div>
+                            </div>
+                            <div class="delivery-stat">
+                                <div class="delivery-stat-icon"><i data-lucide="star"></i></div>
+                                <div class="delivery-stat-value">4.9</div>
+                                <div class="delivery-stat-label">Rating</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="delivery-content">
+                        <div class="delivery-section">
+                            <div class="section-header">
+                                <h2 class="section-title">Available Orders</h2>
+                            </div>
+                            <div class="available-orders">
+                                <div class="available-order">
+                                    <div class="order-priority high">High Priority</div>
+                                    <div class="order-store">
+                                        <div class="store-avatar">FM</div>
+                                        <div class="store-details">
+                                            <h4>Fashion Mall</h4>
+                                            <p>Downtown Store</p>
+                                        </div>
+                                    </div>
+                                    <div class="order-route">
+                                        <div class="route-point">
+                                            <i data-lucide="store" class="route-icon"></i>
+                                            <span class="route-address">123 Fashion St</span>
+                                        </div>
+                                        <i data-lucide="arrow-right" class="route-arrow"></i>
+                                        <div class="route-point">
+                                            <i data-lucide="home" class="route-icon"></i>
+                                            <span class="route-address">456 Customer Ave</span>
+                                        </div>
+                                    </div>
+                                    <div class="order-details">
+                                        <span class="order-items-count">3 items</span>
+                                        <div class="order-distance">
+                                            <i data-lucide="navigation"></i>
+                                            2.3 km
+                                        </div>
+                                        <span class="order-earnings">$12.50</span>
+                                    </div>
+                                    <div class="order-actions">
+                                        <button class="accept-order">Accept Order</button>
+                                        <button class="view-details">Details</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Initialize Lucide icons when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>
