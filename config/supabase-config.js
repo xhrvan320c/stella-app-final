@@ -4,11 +4,11 @@
 export const supabaseConfig = {
     // Your Supabase project URL
     // Find this in your Supabase dashboard under Settings > API
-    url: 'https://your-project-ref.supabase.co',
+    url: https://jzwfaisthvcgnwnsipvn.supabase.co,
     
     // Your Supabase anon/public key
     // Find this in your Supabase dashboard under Settings > API
-    anonKey: 'your-anon-key-here',
+    anonKey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp6d2ZhaXN0aHZjZ253bnNpcHZuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM4MTQxMjMsImV4cCI6MjA2OTM5MDEyM30.8Bx78Z0ht2VV_ggpD-JuMOeJIIQdgvz3TDa-S8NH-CU,
     
     // Optional: Service role key (for admin operations)
     // Only use this on the server side, never expose in client code
