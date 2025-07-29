@@ -27,8 +27,8 @@ async function main() {
     try {
         console.log('Please provide your Supabase project details:\n');
         
-        const projectUrl = await askQuestion('Enter your Supabase Project URL (e.g., https://abc123.supabase.co): ');
-        const anonKey = await askQuestion('Enter your Supabase Anon Key: ');
+        const projectUrl = await askQuestion('https://jzwfaisthvcgnwnsipvn.supabase.co');
+        const anonKey = await askQuestion('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp6d2ZhaXN0aHZjZ253bnNpcHZuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM4MTQxMjMsImV4cCI6MjA2OTM5MDEyM30.8Bx78Z0ht2VV_ggpD-JuMOeJIIQdgvz3TDa-S8NH-CU');
         
         // Validate inputs
         if (!projectUrl || !projectUrl.includes('supabase.co')) {
